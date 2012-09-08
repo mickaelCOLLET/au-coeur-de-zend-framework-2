@@ -1,5 +1,4 @@
 <div class="row">
-    
     <div class="span7">
         <h2>Tutoriel Zend Framework 2 en français</h2><br />
         <?php foreach($tutos as $tuto) : ?>
@@ -13,8 +12,7 @@
                 </blockquote>
             </p>
         <?php endforeach; ?>
-        <?php /*echo $this->paginationControl($tutos, null, 'bloc/paginator');*/ ?>
-        <?php echo $this->render('bloc/paginator'); ?>
+        <?php echo $this->paginationControl($tutos, null, 'bloc/paginator', array('url' => $this->url())); ?>
     </div>
     <?php echo $this->render('bloc/book'); ?>
 </div>

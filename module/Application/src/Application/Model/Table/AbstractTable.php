@@ -2,34 +2,13 @@
 
 namespace Application\Model\Table;
 
-use Zend\Db\TableGateway\AbstractTableGateway,
-    Zend\Db\Adapter\Adapter,
-    Zend\Db\ResultSet\ResultSet,
-    Zend\Db\Sql\Select;
+use Zend\Db\TableGateway\TableGateway;
 
-class AbstractTable extends AbstractTableGateway
-{
-    public function __construct($adapter, $table = null)
-    {
-        if($table) {
-            $this->table = $table;
-        }
-        $this->adapter = $adapter;
-        $this->initialize();
-    }
-    
-    public function select($where=null)
-    {
-        if(!$where) {   
-            return $this->sql->select();
-        }
-        return parent::select($where);
-    }
-    
+class AbstractTable extends TableGateway
+{    
     public function fetchAll()
     {
-        $select = $this->select();
-        return $this->selectWith($select);
+        return $this->select();
     }
     
     public function fetchRow($where)

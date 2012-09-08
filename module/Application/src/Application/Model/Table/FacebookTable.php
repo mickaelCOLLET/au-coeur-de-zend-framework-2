@@ -4,9 +4,9 @@ namespace Application\Model\Table;
 
 class FacebookTable extends AbstractTable
 {    
-    public function fetchAll($lang='fr', $limit=10)
+    public function fetchAllLast($limit = 10)
     {
-        $select = $this->select();
+        $select = $this->getSql()->select();
         $select->limit($limit)->offset(0);
         
         return $this->selectWith($select);

@@ -19,7 +19,7 @@ class YoutubeTable extends AbstractTable
     
     public function fetchAllLastValid($lang='fr', $limit=10)
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->join('language','language.id = tweet.language')
                         ->where(array('moderate'=>1))
                         ->where(array('language.code'=>$lang))

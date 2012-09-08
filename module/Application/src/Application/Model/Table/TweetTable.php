@@ -21,7 +21,7 @@ class TweetTable extends AbstractTable
     
     public function fetchLastToPublished($lang='fr')
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->columns(array('date','user','text'))
                         ->join('language','language.id = tweet.language')
                         ->where(array('moderate'=>1))
@@ -36,9 +36,9 @@ class TweetTable extends AbstractTable
         return null;
     }
     
-    public function fetchAllQueryLastValid()
+    public function getQueryLastValid()
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->columns(array('date','user','text'))
                         ->join('language','language.id = tweet.language')
                         ->where(array('moderate'=>1))
@@ -48,7 +48,7 @@ class TweetTable extends AbstractTable
     
     public function fetchAllLastValid($limit = 10, $page = 1)
     {
-        $select = $this->fetchAllQueryLastValid();
+        $select = $this->getQueryLastValid();
         $select->limit($limit)->offset($limit*(max($page,1)-1));
         
         return $this->selectWith($select);
@@ -56,7 +56,7 @@ class TweetTable extends AbstractTable
     
     public function fetchAllFilterBySearchAndLang($search, $lang = 'fr', $limit = 10)
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->columns(array('date','user','text'))
                         ->join('language','language.id = tweet.language')
                         ->where(array('moderate'=>1))

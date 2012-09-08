@@ -17,7 +17,7 @@
             </dt>
             <dd>
                 <?php
-                    echo $this->formInput($form->get('web_identity')->get('name'));
+                    echo $this->formText($form->get('web_identity')->get('name'));
                     echo $this->formElementErrors($form->get('web_identity')->get('name'));
                 ?>
             </dd>
@@ -26,7 +26,7 @@
             </dt>
             <dd>
                 <?php
-                    echo $this->formInput($form->get('web_identity')->get('firstname'));
+                    echo $this->formText($form->get('web_identity')->get('firstname'));
                     echo $this->formElementErrors($form->get('web_identity')->get('firstname'));
                 ?>
             </dd>
@@ -37,7 +37,7 @@
             </dt>
             <dd>
                 <?php
-                    echo $this->formInput($form->get('web_identity')->get('email'));
+                    echo $this->formEmail($form->get('web_identity')->get('email'));
                     echo $this->formElementErrors($form->get('web_identity')->get('email'));
                 ?>
             </dd>
@@ -45,19 +45,19 @@
                 <li>
                     <?php
                         echo $this->formLabel($form->get('php_knowledge')->get('php5certification'));
-                        echo $this->formInput($form->get('php_knowledge')->get('php5certification'));
+                        echo $this->formCheckbox($form->get('php_knowledge')->get('php5certification'));
                     ?>
                 </li>
                 <li>
                     <?php
                         echo $this->formLabel($form->get('php_knowledge')->get('php53certification'));
-                        echo $this->formInput($form->get('php_knowledge')->get('php53certification'));
+                        echo $this->formCheckbox($form->get('php_knowledge')->get('php53certification'));
                     ?>
                 </li>
                 <li>
                     <?php
                         echo $this->formLabel($form->get('php_knowledge')->get('zf1certification'));
-                        echo $this->formInput($form->get('php_knowledge')->get('zf1certification'));
+                        echo $this->formCheckbox($form->get('php_knowledge')->get('zf1certification'));
                     ?>
                 </li>
             </ul>

@@ -2,10 +2,10 @@
 
 namespace Cron\Controller;
 
-use Zend\Mvc\Controller\ActionController,
-    Zend\Mvc\MvcEvent,
-    Zend\Stdlib\ResponseInterface as Response,
-    Zend\Stdlib\RequestInterface as Request;
+use Zend\Mvc\Controller\ActionController;
+use Zend\Mvc\MvcEvent;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\Stdlib\RequestInterface as Request;
 
 class AbstractController extends ActionController
 {
@@ -17,7 +17,7 @@ class AbstractController extends ActionController
      */
     public function dispatch(Request $request, Response $response = null)
     {
-        $this->events()->attach(MvcEvent::EVENT_DISPATCH, array($this,'postDispatch'), -100);
+        $this->events()->attach(MvcEvent::EVENT_DISPATCH, array($this, 'postDispatch'), -1000);
         return parent::dispatch($request, $response);
     }
     

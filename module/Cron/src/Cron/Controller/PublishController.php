@@ -2,42 +2,22 @@
 
 namespace Cron\Controller;
 
-use Zend\Service\Twitter\Twitter,
-    ZFBook\Service\Twitter\Language as ZFBTwitterLang,
-    Application\Model\TweetTable;
+use Zend\Service\Twitter\Twitter;
+use ZFBook\Service\Twitter\Language as ZFBTwitterLang;
+use Application\Model\TweetTable;
 
 class PublishController extends AbstractController
-{
-    /**
-     * @var Application\Model\TweetTable
-     */
-    protected $tweetTable;
-    
-    /**
-     * @var Zend\Service\Twitter\Twitter
-     */
-    protected $twitter;
-    
+{    
     public function tweetAction()
     {
     	// get last tweet not published
-        $tweetFR = $this->tweetTable->fetchLastToPublished('fr');
-        $tweetEN = $this->tweetTable->fetchLastToPublished('en');
+        $sm = $this->getServiceLocator();
+        $tweetFR = $sm->get('TweetModel')->fetchLastToPublished('fr');
+        $tweetEN = $sm->get('TweetModel')->fetchLastToPublished('en');
         
         // twitt that
-    	$response = $this->twitter->status->update('[FR]@'.$tweetFR->user . ':'.$tweetFR->text);
-    	$response = $this->twitter->status->update('[EN]@'.$tweetEN->user . ':'.$tweetEN->text);
-    }
-    
-    public function setTweetService(TweetTable $tweetTable)
-    {
-        $this->tweetTable = $tweetTable;
-        return $this;
-    }
-    
-    public function setTwitter(Twitter $twitter)
-    {
-        $this->tweetService = $twitter;
-        return $this;
+        $twitter = new Twitter();
+    	$response = $twitter->status->update('[FR]@'.$tweetFR->user . ':'.$tweetFR->text);
+    	$response = $twitter->status->update('[EN]@'.$tweetEN->user . ':'.$tweetEN->text);
     }
 }

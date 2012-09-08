@@ -46,8 +46,7 @@
                 <?php endforeach; ?>
             </tbody>
             </table>
-            <?php /*echo $this->paginationControl($tweetsen);*/ ?>
-            <?php echo $this->render('bloc/paginator'); ?>
+            <?php echo $this->paginationControl($developer, null, 'bloc/paginator', array('url' => $this->url())); ?>
             <a class="btn" href="<?php echo $this->url('register-developer'); ?>">Ajoutez votre profil »</a>
     </div>
 </div>

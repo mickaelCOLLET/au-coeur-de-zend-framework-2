@@ -8,7 +8,7 @@ class TutorielTable extends AbstractTable
 {
     public function fetchAllLanguage()
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->columns(array('id','url','title','description','img','tags'))
                         ->join('language','language.id = tutoriel.language',array('code'))
                         ->where(array('moderate'=>2));
@@ -18,7 +18,7 @@ class TutorielTable extends AbstractTable
     
     public function fetchAllFilterByIdAndLang($ids, $lang, $limit)
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->columns(array('url','title','description','img','tags','date'))
                         ->join('language','language.id = tutoriel.language')
                         ->where(array('moderate'=>2))
@@ -33,7 +33,7 @@ class TutorielTable extends AbstractTable
     
     public function getQueryAllLastValidByLang($lang='fr', $limit=10, $page=1)
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->columns(array('url','title','description','img','tags','date'))
                         ->join('language','language.id = tutoriel.language')
                         ->where(array('moderate'=>2))
@@ -52,7 +52,7 @@ class TutorielTable extends AbstractTable
     
     public function fetchAllFilterByTagAndLang($search, $lang='fr', $limit=10)
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->columns(array('url','title','description','img','tags','date'))
                         ->join('language','language.id = tutoriel.language')
                         ->where(array('moderate'=>2))
@@ -66,7 +66,7 @@ class TutorielTable extends AbstractTable
     
     public function fetchAllFilterBySearchAndLang($search,$lang='fr', $limit=10)
     {
-        $select = $this->select()
+        $select = $this->getSql()->select()
                         ->columns(array('url','title','description','img','tags','date'))
                         ->join('language','language.id = tutoriel.language')
                         ->where(array('moderate'=>2))

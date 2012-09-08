@@ -2,23 +2,11 @@
 
 namespace Application\Model\Service;
 
-use Application\Model\TweetTable,
-    Application\Model\LanguageTable,
-    Zend\Validator\ValidatorChain,
-    Zend\Validator\Regex;
+use Zend\Validator\ValidatorChain;
+use Zend\Validator\Regex;
 
-class TweetService
+class TweetService implements AbstractService
 {
-    /**
-     * @var Application\Model\TweetTable
-     */
-    protected $tweetTable;
-    
-    /**
-     * @var Application\Model\LanguageTable
-     */
-    protected $languageTable;
-    
     protected $invalidChain;
     
     /*
@@ -26,19 +14,21 @@ class TweetService
      */
     public function addTweet(array $tweet)
     {   
-        $row = $this->tweetTable->fetchRow(array('id'=>$tweet['id_str']));
-        if($row) return;
+        $sm = $this->getServiceLocator();
+        $row = $sm->get('TweetModel')->fetchRow(array('id' => $tweet['id_str']));
+        if($row) {
+            return;
+        }
         
-        $row = $this->languageTable->fetchRow(array('code'=>$tweet['iso_language_code']));
-        if(!$row) return;
+        $row = $sm->get('LanguageModel')->fetchRow(array('code' => $tweet['iso_language_code']));
+        if(!$row) {
+            return;
+        }
         $lang = $row->id;
         
-        if($this->getInvalidatorChain()->isValid($tweet['text']))
-        {
+        if($this->getInvalidatorChain()->isValid($tweet['text'])) {
             $moderate = 0;
-        }
-        else
-        {
+        } else {
             $moderate = 1;
         }
         
@@ -51,25 +41,12 @@ class TweetService
             'language' => $lang,
             'moderate' => $moderate
         );
-        $this->tweetTable->insert($data);
-    }
-    
-    public function setTweetTable(TweetTable $tweetTable)
-    {
-        $this->tweetTable = $tweetTable;
-        return $this;
-    }
-    
-    public function setLanguageTable(LanguageTable $languageTable)
-    {
-        $this->languageTable = $languageTable;
-        return $this;
+        $sm->get('TweetModel')->insert($data);
     }
     
     public function getInvalidatorChain()
     {
-        if(!$this->invalidChain)
-        {
+        if(!$this->invalidChain) {
             $this->invalidChain = new ValidatorChain();
             $this->invalidChain->addValidator(new Regex("#(@|RT)#"));
         }

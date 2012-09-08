@@ -21,16 +21,6 @@ return array(
                 ),
             ),
         ),
-        'register-tutoriel' => array(
-            'type' => 'literal',
-            'options' => array(
-                'route'    => '/tutoriel-zend-framework-2/ajouter-mon-tutoriel',
-                'defaults' => array(
-                    'controller' => 'application-index',
-                    'action'     => 'registertutoriel',
-                ),
-            ),
-        ),
         'tutoriel' => array(
             'type' => 'literal',
             'options' => array(
@@ -108,16 +98,6 @@ return array(
                 'defaults' => array(
                     'controller' => 'application-index',
                     'action'     => 'registerdeveloper',
-                ),
-            ),
-        ),
-        'search' => array(
-            'type' => 'literal',
-            'options' => array(
-                'route'    => '/search',
-                'defaults' => array(
-                    'controller' => 'application-index',
-                    'action'     => 'search',
                 ),
             ),
         ),
