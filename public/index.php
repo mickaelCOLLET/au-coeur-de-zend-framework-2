@@ -1,5 +1,6 @@
 <?php
 
+ini_set('date.timezone',"Europe/Paris");
 ini_set("display_errors", true);
 ini_set("display_startup_errors", true);
 error_reporting(E_ALL | E_STRICT);

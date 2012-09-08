@@ -4,7 +4,7 @@ namespace Application\Model\Service;
 
 use Zend\Service\SlideShare\SlideShow;
 
-class SlideshareService implements AbstractService
+class SlideshareService extends AbstractService
 {
     /*
      * Add a tweet object
@@ -14,12 +14,12 @@ class SlideshareService implements AbstractService
         $sm = $this->getServiceLocator();
         $row = $sm->get('SlideshareModel')->fetchRow(array('url' => $slideShow->getLocation()));
         if($row) {
-            return;
+            return false;
         }
         
         $row = $sm->get('LanguageModel')->fetchRow(array('code' => $slideShow->getLanguage()));
         if(!$row) {
-            return;
+            return false;
         }
         $lang = $row->id;
         
@@ -34,6 +34,6 @@ class SlideshareService implements AbstractService
             'moderate' => 1,
             'moderated' => 0,
         );
-        $sm->get('SlideshareModel')->insert($data);
+        return $sm->get('SlideshareModel')->insert($data);
     }
 }

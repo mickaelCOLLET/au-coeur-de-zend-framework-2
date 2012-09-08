@@ -2,13 +2,13 @@
 
 namespace Cron\Controller;
 
-use Zend\Service\Twitter\SearchOptions;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Http\Client;
-use Zend\Service\SlideShare\SlideShare;
-use Zend\GData\YouTube;
-use Zend\Service\Twitter;
+use ZendService\SlideShare;
+use ZendService\Twitter;
+use ZendGData\YouTube;
 
-class CrawlController extends AbstractController
+class CrawlController extends AbstractActionController
 {
     /**
      * Get new tweet about ZF
@@ -17,16 +17,18 @@ class CrawlController extends AbstractController
     {
     	// get twitter crawled options
         $sm = $this->getServiceLocator();
-        $queries = $sm->get('TwitterOptions')->getQueries();
-        $langs = $sm->get('TwitterOptions')->getLanguages();
+        $twitterOptions = $sm->get('CronModuleOptions')->getTwitterOptions();
+        $queries = $twitterOptions->getQueries();
+        $langs = $twitterOptions->getLanguages();
         $results_type = array('recent', 'popular');
         
+        $list = 0;
         foreach($langs as $lang) {
             foreach($queries as $query) {
                 foreach($results_type as $result_type) {
                     // get search
                     $search = new Twitter\Search();
-                    $search->setOptions(new SearchOptions(array(
+                    $search->setOptions(new Twitter\SearchOptions(array(
                         'rpp' => 25,
                         'include_entities' => true,
                         'result_type' => $result_type,
@@ -36,24 +38,30 @@ class CrawlController extends AbstractController
 
                     // add tweets in db
                     foreach($results['results'] as $result) {   
-                        $sm->get('TweetService')->addTweet($result);
+                        $list += (integer)$sm->get('TweetService')->addTweet($result);
                     }
                 }
             }
         }
+        
+        return $list . ' tweets ajoutés';
     }
     
     public function socialAction()
     {   
+        $listSlideshow = 0;
+        
     	// get linkedin slides
         $sm = $this->getServiceLocator();
-        $slideshare = new SlideShare();
+        $slideshare = new SlideShare\SlideShare('myapikey', 'sharedsecret');
         $slideshare->setCacheObject(new \ZFBook\Cache\Storage\Adapter\BlackHole());
     	$slideShows = $slideshare->searchSlideShows('zend framework');
     	
     	foreach ($slideShows as $slideShow) {
-            $sm->get('SldieshareService')->addSlideShow($slideShow);
+            $listSlideshow += (integer)$sm->get('SldieshareService')->addSlideShow($slideShow);
         }
+        
+        $listVideo = 0;
     	
     	// get youtube webinars
     	$youtube = new YouTube();
@@ -65,7 +73,9 @@ class CrawlController extends AbstractController
         $videoFeed = $youtube->getVideoFeed($query);
 
         foreach ($videoFeed as $videoEntry) {
-            $sm->get('YoutubeModel')->addVideo($videoEntry);
+            $listVideo += (integer)$sm->get('YoutubeModel')->addVideo($videoEntry);
         }
+        
+        return $listSlideshow . ' slideshow ajoutés et ' . $listVideo . ' vidéos ajoutées.';
     }
 }

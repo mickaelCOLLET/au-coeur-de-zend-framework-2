@@ -2,11 +2,10 @@
 
 namespace Cron\Controller;
 
-use Zend\Service\Twitter\Twitter;
-use ZFBook\Service\Twitter\Language as ZFBTwitterLang;
-use Application\Model\TweetTable;
+use Zend\Mvc\Controller\AbstractActionController;
+use ZendService\Twitter\Twitter;
 
-class PublishController extends AbstractController
+class PublishController extends AbstractActionController
 {    
     public function tweetAction()
     {

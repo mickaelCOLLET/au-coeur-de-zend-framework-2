@@ -3,6 +3,7 @@
 namespace Application;
 
 use Application\Model\Table;
+use Application\Options;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\EventInterface;
@@ -38,6 +39,10 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
     public function getServiceConfig()
     {
         return array(
+            'invokables' => array(
+                'TweetService' => 'Application\Model\Service\TweetService',
+                'SlideshareService' => 'Application\Model\Service\SlideshareService',
+            ),
             'factories' => array(
                 'DbAdapter' => function($sm) {
                     $config = $sm->get('config');
@@ -66,9 +71,10 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
                 'DeveloperTable' => function($sm) {
                     return new Table\DeveloperTable('developer', $sm->get('DbAdapter'));
                 },
-                'TwitterOptions' => '',
-                'TweetService' => 'Application\Model\Service\TweetService',
-                'SlideshareService' => 'Application\Model\Service\SlideshareService',
+                'CronModuleOptions' => function($sm) {
+                    $config = $sm->get('Config');
+                    return new Options\ModuleOptions($config['cron_options']);
+                },
             ),
             'aliases' => array(
                 'TweetModel' => 'TweetTable',

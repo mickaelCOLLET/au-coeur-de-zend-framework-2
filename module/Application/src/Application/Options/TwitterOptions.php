@@ -1,14 +1,14 @@
 <?php
 
-namespace ZFBook\Service\Twitter;
+namespace Application\Options;
 
-use Zend\Stdlib\Options;
+use Zend\Stdlib\AbstractOptions;
 
-class TwitterOptions extends Options
+class TwitterOptions extends AbstractOptions
 {
-    protected $queries = array();
+    protected $queries;
     
-    protected $languages = array();
+    protected $languages;
     
     public function getQueries()
     {
@@ -18,9 +18,10 @@ class TwitterOptions extends Options
     public function setQueries($queries)
     {
         $this->queries = $queries;
+        return $this;
     }
     
-	public function getLanguages()
+    public function getLanguages()
     {
         return $this->languages;
     }
@@ -28,5 +29,6 @@ class TwitterOptions extends Options
     public function setLanguages($languages)
     {
         $this->languages = $languages;
+        return $this;
     }
 }

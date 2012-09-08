@@ -5,7 +5,7 @@ namespace Application\Model\Service;
 use Zend\Validator\ValidatorChain;
 use Zend\Validator\Regex;
 
-class TweetService implements AbstractService
+class TweetService extends AbstractService
 {
     protected $invalidChain;
     
@@ -17,12 +17,12 @@ class TweetService implements AbstractService
         $sm = $this->getServiceLocator();
         $row = $sm->get('TweetModel')->fetchRow(array('id' => $tweet['id_str']));
         if($row) {
-            return;
+            return false;
         }
         
         $row = $sm->get('LanguageModel')->fetchRow(array('code' => $tweet['iso_language_code']));
         if(!$row) {
-            return;
+            return false;
         }
         $lang = $row->id;
         
@@ -41,7 +41,7 @@ class TweetService implements AbstractService
             'language' => $lang,
             'moderate' => $moderate
         );
-        $sm->get('TweetModel')->insert($data);
+        return $sm->get('TweetModel')->insert($data);
     }
     
     public function getInvalidatorChain()
