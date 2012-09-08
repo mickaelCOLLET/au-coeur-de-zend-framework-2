@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="span7">
+    	<h2>Ajouter son profil développeur Zend Framework</h2><br />
+        <a class="btn" href="<?php echo $this->url('developer'); ?>">Liste des développeurs »</a>
+    	<br /><br />
+        <?php echo $this->messages(array('valid', 'error')); ?>
+        <?php
+            $form = $this->form;
+            $form->setAttribute('action', $this->url());
+            $form->setAttribute('method', 'post');
+            echo $this->form()->openTag($form);
+        ?>
+        <dl class="zend_form">
+            <dt>
+                <?php echo $this->formLabel($form->get('name')); ?>
+            </dt>
+            <dd>
+                <?php
+                    echo $this->formInput($form->get('name'));
+                    echo $this->formElementErrors($form->get('name'));
+                ?>
+            </dd>
+            <dt>
+                <?php
+                    echo $this->formLabel($form->get('email'));
+                ?>
+            </dt>
+            <dd>
+                <?php
+                    echo $this->formInput($form->get('email'));
+                    echo $this->formElementErrors($form->get('email'));
+                ?>
+            </dd>
+            <ul>
+                <li>
+                    <?php
+                        echo $this->formLabel($form->get('php5certification'));
+                        echo $this->formInput($form->get('php5certification'));
+                    ?>
+                </li>
+                <li>
+                    <?php
+                        echo $this->formLabel($form->get('php53certification'));
+                        echo $this->formInput($form->get('php53certification'));
+                    ?>
+                </li>
+                <li>
+                    <?php
+                        echo $this->formLabel($form->get('zf1certification'));
+                        echo $this->formInput($form->get('zf1certification'));
+                    ?>
+                </li>
+            </ul>
+            <dt>
+                <?php
+                    echo $this->formLabel($form->get('twitterlink'));
+                ?>
+            </dt>
+            <dd>
+                <?php
+                    echo $this->formInput($form->get('twitterlink'));
+                    echo $this->formElementErrors($form->get('twitterlink'));
+                ?>
+            </dd>
+            <dt>
+                <?php
+                    echo $this->formLabel($form->get('viadeolink'));
+                ?>
+            </dt>
+            <dd>
+                <?php
+                    echo $this->formInput($form->get('viadeolink'));
+                    echo $this->formElementErrors($form->get('viadeolink'));
+                ?>
+            </dd>
+            <dt>
+                <?php
+                    echo $this->formLabel($form->get('linkedinlink'));
+                ?>
+            </dt>
+            <dd>
+                <?php
+                    echo $this->formInput($form->get('linkedinlink'));
+                    echo $this->formElementErrors($form->get('linkedinlink'));
+                ?>
+            </dd>
+            <dt>
+                <?php echo $this->formLabel($form->get('add')); ?>
+            </dt>
+            <dd>
+                <?php
+                    echo $this->formElement($form->get('add'));
+                ?>
+            </dd>
+        </dl>
+        <?php echo $this->form()->closeTag() ?>
+    </div>
+    <?php echo $this->render('bloc/book'); ?>
+</div>
