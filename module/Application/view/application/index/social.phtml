@@ -14,13 +14,22 @@
     </div>
     <div class="span4">
     	<h2>ZF2 sur Youtube</h2><br />
+        <?php foreach($youtube as $y) : ?>
+            <p>
+                <a href="<?php echo $y->url; ?>" target="_blank"><?php echo $y->title; ?></a>
+                <blockquote>
+                    <?php echo $y->description; ?>
+                </blockquote>
+            </p>
+            <br />
+        <?php endforeach; ?>
     </div>
     <div class="span4">
     	<h2>ZF2 sur Facebook</h2><br />
         <?php foreach($facebook as $f) : ?>
             <p>
                 <a href="<?php echo $f->url; ?>" target="_blank"><?php echo $f->title; ?></a>
-            <blockquote>
+                <blockquote>
                     <?php echo $f->description; ?>
                 </blockquote>
             </p>

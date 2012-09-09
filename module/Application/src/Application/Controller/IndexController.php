@@ -87,7 +87,8 @@ class IndexController extends AbstractController
         $sm = $this->getServiceLocator();
         return array(
             'slideshare' => $sm->get('SlideshareModel')->fetchAllLastValid('all', 5),
-            'facebook' => $sm->get("FacebookModel")->fetchAllLast(5),
+            'facebook' => $sm->get("FacebookModel")->fetchAllLast(8),
+            'youtube' => $sm->get("YoutubeModel")->fetchAllLast(5),
        );
     }
     

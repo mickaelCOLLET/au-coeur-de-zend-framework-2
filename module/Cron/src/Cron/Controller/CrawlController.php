@@ -48,11 +48,12 @@ class CrawlController extends AbstractActionController
     }
     
     public function socialAction()
-    {   
+    { 
+        $sm = $this->getServiceLocator();
+        $listVideo = 0;
         $listSlideshow = 0;
         
     	// get linkedin slides
-        $sm = $this->getServiceLocator();
         $slideshare = new SlideShare\SlideShare('myapikey', 'sharedsecret');
         $slideshare->setCacheObject(new \ZFBook\Cache\Storage\Adapter\BlackHole());
     	$slideShows = $slideshare->searchSlideShows('zend framework');
@@ -61,14 +62,12 @@ class CrawlController extends AbstractActionController
             $listSlideshow += (integer)$sm->get('SldieshareService')->addSlideShow($slideShow);
         }
         
-        $listVideo = 0;
-    	
     	// get youtube webinars
     	$youtube = new YouTube();
         $query = $youtube->newVideoQuery();
         $query->videoQuery = 'zend framework';
         $query->startIndex = 0;
-        $query->maxResults = 20;
+        $query->maxResults = 50;
         $query->orderBy = 'viewCount';
         $videoFeed = $youtube->getVideoFeed($query);
 

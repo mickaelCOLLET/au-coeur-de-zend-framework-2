@@ -2,7 +2,7 @@
 
 namespace Application\Model\Table;
 
-use Zend\GData\YouTube\VideoEntry;
+use ZendGData\YouTube\VideoEntry;
 
 class YoutubeTable extends AbstractTable
 {    
@@ -11,18 +11,17 @@ class YoutubeTable extends AbstractTable
         $data = array(
             'title'  => $video->getVideoTitle(),
             'description'  => $video->getVideoDescription(),
-            'url' => $video->getLocation(),
+            'url' => $video->getVideoWatchPageUrl(),
             'date' => $video->getRecorded(),
         );
-        $this->insert($data);
+        
+        return $this->insert($data);
     }
     
-    public function fetchAllLastValid($lang='fr', $limit=10)
+    public function fetchAllLast($limit = 10)
     {
         $select = $this->getSql()->select()
-                        ->join('language','language.id = tweet.language')
-                        ->where(array('moderate'=>1))
-                        ->where(array('language.code'=>$lang))
+                        ->where(array('moderate' => 1))
                         ->order('date DESC');
         $select->limit($limit)->offset(0);
         

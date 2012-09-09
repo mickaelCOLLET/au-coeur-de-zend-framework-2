@@ -32,7 +32,6 @@ class SlideshareService extends AbstractService
             'date' => $date->format('Y-m-d H:i:s'),
             'language' => $lang,
             'moderate' => 1,
-            'moderated' => 0,
         );
         return $sm->get('SlideshareModel')->insert($data);
     }

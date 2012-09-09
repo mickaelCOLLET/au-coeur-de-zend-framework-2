@@ -14,7 +14,6 @@ class TweetTable extends AbstractTable
             'user'  => $user,
             'language' => $language,
             'moderate' => 0,
-            'moderated' => 0
         );
         $this->insert($data);
     }
