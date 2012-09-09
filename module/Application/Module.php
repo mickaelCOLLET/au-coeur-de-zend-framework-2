@@ -76,10 +76,6 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
                 'DeveloperTable' => function($sm) {
                     return new Table\DeveloperTable('developer', $sm->get('DbAdapter'));
                 },
-                'CronModuleOptions' => function($sm) {
-                    $config = $sm->get('Config');
-                    return new Options\ModuleOptions($config['cron_options']);
-                },
             ),
             'aliases' => array(
                 'TweetModel' => 'TweetTable',

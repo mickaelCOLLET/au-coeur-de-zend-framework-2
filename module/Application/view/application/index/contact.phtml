@@ -10,61 +10,12 @@
             echo $this->form()->openTag($form);
         ?>
         <dl class="zend_form">
-            <dt>
-                <?php echo $this->formLabel($form->get('web_identity')->get('name')); ?>
-            </dt>
-            <dd>
-                <?php
-                    echo $this->formInput($form->get('web_identity')->get('name'));
-                    echo $this->formElementErrors($form->get('web_identity')->get('name'));
-                ?>
-            </dd>
-            <dt>
-                <?php echo $this->formLabel($form->get('web_identity')->get('firstname')); ?>
-            </dt>
-            <dd>
-                <?php
-                    echo $this->formInput($form->get('web_identity')->get('firstname'));
-                    echo $this->formElementErrors($form->get('web_identity')->get('firstname'));
-                ?>
-            </dd>
-            <dt>
-                <?php
-                    echo $this->formLabel($form->get('web_identity')->get('email'));
-                ?>
-            </dt>
-            <dd>
-                <?php
-                    echo $this->formInput($form->get('web_identity')->get('email'));
-                    echo $this->formElementErrors($form->get('web_identity')->get('email'));
-                ?>
-            </dd>
-            <dt>
-                <?php echo $this->formLabel($form->get('simple_message')->get('subject')); ?>
-            </dt>
-            <dd>
-                <?php
-                    echo $this->formInput($form->get('simple_message')->get('subject'));
-                    echo $this->formElementErrors($form->get('simple_message')->get('subject'));
-                ?>
-            </dd>
-            <dt>
-                <?php echo $this->formLabel($form->get('simple_message')->get('message')); ?>
-            </dt>
-            <dd>
-                <?php
-                    echo $this->formTextarea($form->get('simple_message')->get('message'));
-                    echo $this->formElementErrors($form->get('simple_message')->get('message'));
-                ?>
-            </dd>
-            <dt>
-                <?php echo $this->formLabel($form->get('send')); ?>
-            </dt>
-            <dd>
-                <?php
-                    echo $this->formElement($form->get('send'));
-                ?>
-            </dd>
+            <?php echo $this->formRow($form->get('web_identity')->get('name')); ?>
+            <?php echo $this->formRow($form->get('web_identity')->get('firstname')); ?>
+            <?php echo $this->formRow($form->get('web_identity')->get('email')); ?>
+            <?php echo $this->formRow($form->get('simple_message')->get('subject')); ?>
+            <?php echo $this->formRow($form->get('simple_message')->get('message')); ?>
+            <?php echo $this->formRow($form->get('send')); ?>
         </dl>
         <?php echo $this->form()->closeTag() ?>
     </div>

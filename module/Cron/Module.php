@@ -6,9 +6,11 @@ use Zend\ModuleManager\ModuleManager;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\Console\Adapter\AdapterInterface;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ConsoleUsageProviderInterface
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface,
+        ConsoleUsageProviderInterface, ServiceProviderInterface
 {
     public function getAutoloaderConfig()
     {
@@ -30,6 +32,18 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Co
             'Use --crawl-tweet to get new tweets about zend framework.',
             'Use --crawl-social to get new slideshows and videos about zend framework.',
             'Use --publish-tweet to publish new tweets about zend framework.',
+        );
+    }
+    
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'CronModuleOptions' => function($sm) {
+                    $config = $sm->get('Config');
+                    return new Options\ModuleOptions($config['cron_options']);
+                },
+            ),
         );
     }
 }
