@@ -4,11 +4,9 @@ namespace Application\Controller;
 
 use Zend\View\Model\ViewModel;
 use Application\Form\Form;
-use ZFBook\Service\Twitter\Language as TwitterLanguage;
 use Zend\Mail\Message;
-use Zend\Mail\Transport\Smtp as Mail;
+use Zend\Mail\Transport\Smtp;
 use Zend\Paginator;
-use Zend\InputFilter\InputFilter;
 
 class IndexController extends AbstractController
 {    
@@ -137,7 +135,7 @@ class IndexController extends AbstractController
         
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $formData = $request->getPost()->toArray();
+            $formData = $request->getPost();
             $form->setData($formData);
             if ($form->isValid()) {
                $formData = $form->getData();
@@ -147,7 +145,7 @@ class IndexController extends AbstractController
                $message->setSubject($formData['simple_message']['subject']);
                $message->setBody($formData['simple_message']['message']);
                try {
-                   $email = new Mail($this->getServiceLocator()->get('SmtpOptions'));
+                   $email = new Smtp($this->getServiceLocator()->get('SmtpOptions'));
                    $email->send($message);
                } catch(\RuntimeException $e) {
                     $this->plugin('flashmessenger')->addErrorMessage("Le formulaire est actuellement indisponible, merci d'utiliser l'adresse email contact@zend-framework-2.fr.");

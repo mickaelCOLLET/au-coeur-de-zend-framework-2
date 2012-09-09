@@ -1,16 +1,6 @@
 <?php
 return array(
     'ZFBook\Db\Service\DbFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/DbFactory.php',
-    'ZFBook\Db\Service\TableFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/TableFactory.php',
-    'ZFBook\Db\Service\TweetTableFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/TweetTableFactory.php',
-    'ZFBook\Db\Service\TutorielTableFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/TutorielTableFactory.php',
-    'ZFBook\Db\Service\YoutubeTableFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/YoutubeTableFactoryFactory.php',
-    'ZFBook\Db\Service\SlideshareTableFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/SlideshareTableFactory.php',
-    'ZFBook\Db\Service\LanguageTableFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/LanguageTableFactory.php',
-    'ZFBook\Db\Service\FacebookTableFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/FacebookTableFactory.php',
-    'ZFBook\Db\Service\DeveloperTableFactory' => __DIR__ . '/../vendor/ZFBook/Db/Service/DeveloperTableFactory.php',
-    'ZFBook\Navigation\Service\NavigationFactory' => __DIR__ . '/../vendor/ZFBook/Navigation/Service/NavigationFactory.php',
-    'ZFBook\Service\Twitter\TwitterOptions' => __DIR__ . '/../vendor/ZFBook/Service/Twitter/TwitterOptions.php',
     'ZFBook\View\Helper\UserTwitter' => __DIR__ . '/../vendor/ZFBook/View/Helper/UserTwitter.php',
     'ZFBook\View\Helper\Tags' => __DIR__ . '/../vendor/ZFBook/View/Helper/Tags.php',
     'ZFBook\View\Helper\FlashMessenger'         => __DIR__ . '/../vendor/ZFBook/View/Helper/FlashMessenger.php',
