@@ -144,10 +144,10 @@ class IndexController extends AbstractController
                $message = new Message();
                $message->addTo('blanchon.vincent@gmail.com');
                $message->setFrom($formData['web_identity']['email']);
-               $message->setSubject($formData['simple_message']['sujet']);
+               $message->setSubject($formData['simple_message']['subject']);
                $message->setBody($formData['simple_message']['message']);
                try {
-                   $email = new Mail();
+                   $email = new Mail($this->getServiceLocator()->get('SmtpOptions'));
                    $email->send($message);
                } catch(\RuntimeException $e) {
                     $this->plugin('flashmessenger')->addErrorMessage("Le formulaire est actuellement indisponible, merci d'utiliser l'adresse email contact@zend-framework-2.fr.");

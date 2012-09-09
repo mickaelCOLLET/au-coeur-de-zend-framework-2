@@ -6,4 +6,11 @@ return array(
         'username' => 'root',
         'password' => 'root',
     ),
+    'smtp_options' => array(
+        'host' => '',
+        'connection_config' => array(
+            'username' => '',
+            'password' => '',
+        )
+    ), 
 );

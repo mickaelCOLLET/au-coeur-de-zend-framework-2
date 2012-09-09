@@ -13,6 +13,7 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\View\Helper\PaginationControl;
 use Zend\Navigation\Page\Mvc as PageMvc;
 use Zend\Db\Adapter\Adapter as DbAdapter;
+use Zend\Mail\Transport\SmtpOptions;
 
 class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
         ConfigProviderInterface
@@ -44,6 +45,10 @@ class Module implements AutoloaderProviderInterface, ServiceProviderInterface,
                 'SlideshareService' => 'Application\Model\Service\SlideshareService',
             ),
             'factories' => array(
+                'SmtpOptions' => function($sm) {
+                        $config = $sm->get('config');
+                        return new SmtpOptions($config['smtp_options']);
+                },
                 'DbAdapter' => function($sm) {
                     $config = $sm->get('config');
                     $config = $config['db'];
