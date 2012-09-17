@@ -8,16 +8,25 @@ class IndexControllerTest extends AbstractControllerTestCase
 {    
     public function setUp()
     {
-        AbstractControllerTestCase::setApplicationConfig(include __DIR__ . '/../../../../config/application.config.php');
+        AbstractControllerTestCase::setApplicationConfig(
+            include __DIR__ . '/../../../config/application.config.php'
+        );
         parent::setUp();
     }
     
     public function testCanDisplayIndex()
     {
+        // dispatch url
         $this->dispatch('/');
+        
+        // basic assertions
         $this->assertResponseStatusCode(200);
         $this->assertActionName('index');
         $this->assertControllerName('application-index');
         $this->assertRouteMatchName('home');
+        
+        // custom assert
+        $sm = $this->getApplicationServiceLocator();
+        // ... here my asserts ...
     }
 }
