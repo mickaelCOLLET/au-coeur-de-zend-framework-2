@@ -12,9 +12,9 @@ return array(
             __DIR__ . '/autoload/local.config.php',
         ),
         'module_paths' => array(
-            'Application' => './module/Application',
-            'Cron' => './module/Cron',
-            'Administration' => './module/Administration',
+            'Application' => __DIR__ . '/../module/Application',
+            'Cron' => __DIR__ . '/../module/Cron',
+            'Administration' => __DIR__ . '/../module/Administration',
         ),
         'lazy_loading' => array(
             'Cron' => array(
