@@ -24,6 +24,8 @@ class IndexControllerTest extends AbstractControllerTestCase
         $this->assertActionName('index');
         $this->assertControllerName('application-index');
         $this->assertRouteMatchName('home');
+        $this->assertQuery('div[class="container"]');
+        $this->assertQueryCount('div[class="container"]', 2);
         
         // custom assert
         $sm = $this->getApplicationServiceLocator();
