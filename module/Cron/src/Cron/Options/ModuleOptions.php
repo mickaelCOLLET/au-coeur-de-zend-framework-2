@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Options;
+namespace Cron\Options;
 
 use Zend\Stdlib\AbstractOptions;
 

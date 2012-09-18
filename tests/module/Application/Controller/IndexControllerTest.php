@@ -2,13 +2,13 @@
 
 namespace ModuleTest\Application\Controller;
 
-use ZFUT\Test\PHPUnit\Controller\AbstractControllerTestCase;
+use ZFUT\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
-class IndexControllerTest extends AbstractControllerTestCase
+class IndexControllerTest extends AbstractHttpControllerTestCase
 {    
     public function setUp()
     {
-        AbstractControllerTestCase::setApplicationConfig(
+        $this->setApplicationConfig(
             include __DIR__ . '/../../../config/application.config.php'
         );
         parent::setUp();

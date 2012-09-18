@@ -16,18 +16,5 @@ return array(
             'Cron' => __DIR__ . '/../../module/Cron',
             'Administration' => __DIR__ . '/../../module/Administration',
         ),
-        'lazy_loading' => array(
-            'Cron' => array(
-            	'sapi' => 'cli',
-            ),
-            'Administration' => array(
-            	'remote_addr' => array('127.0.0.1'),
-            ),
-        ),
-    ),
-    'service_manager' => array(
-        'factories'    => array(
-            'ModuleManager' => 'ZFMLL\Mvc\Service\ModuleManagerFactory',
-        ),
     ),
 );
