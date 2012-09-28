@@ -3,15 +3,9 @@
 namespace Application;
 
 use Application\Model\Table;
-use Application\Options;
-use Zend\ModuleManager\ModuleManager;
-use Zend\Mvc\MvcEvent;
-use Zend\EventManager\EventInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\View\Helper\PaginationControl;
-use Zend\Navigation\Page\Mvc as PageMvc;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Mail\Transport\SmtpOptions;
 
